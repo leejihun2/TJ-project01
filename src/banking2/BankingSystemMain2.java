@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class BankingSystemMain2 {
 	
+	
 	public static void showMenu() {
 		System.out.println("-----Menu------");
 		System.out.println("1.계좌계설 ");
@@ -17,6 +18,8 @@ public class BankingSystemMain2 {
 	}
 	
 	public static void main(String[] args) {
+		
+		System.out.println("1차프로젝트(학원)");
 
 		Scanner scan = new Scanner(System.in);
 		
