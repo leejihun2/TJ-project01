@@ -20,6 +20,7 @@ public class BankingSystemMain2 {
 	public static void main(String[] args) {
 		
 		System.out.println("1차프로젝트(학원)");
+		System.out.println("클론 후 작업 01");
 
 		Scanner scan = new Scanner(System.in);
 		
