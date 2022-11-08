@@ -23,6 +23,7 @@ public class UpdateShop extends IConnectImpl {
 				psmt.setString(4, scanValue("상품일련번호"));
 				int affected = psmt.executeUpdate();
 				System.out.println(affected + "행이 업데이트되었습니다.");
+				break;
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

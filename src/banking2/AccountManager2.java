@@ -61,8 +61,8 @@ public class AccountManager2 {
 				System.out.println("취소합니다");
 				return;
 			}
+			System.out.println(" 완료되었습니다.");
 		}
-		System.out.println(" 완료되었습니다.");
 	}
 
 	// 정보를 출력하는 메서드
@@ -84,7 +84,7 @@ public class AccountManager2 {
 			if (searchaccountnum.equals(acc2.getAccountNum())) {
 				try {
 					int addnum = scanInt(" 입금액");
-					if (addnum < 0) {
+					if (addnum <= 0) {
 						System.out.println("마이너스 금액은 입급할 수 없습니다.");
 						return;
 					} else if (addnum % 500 != 0) {
@@ -111,14 +111,17 @@ public class AccountManager2 {
 		for (Account2 acc2 : accountHashSet) {
 			if (searchaccountnum.equals(acc2.getAccountNum())) {
 				int addnum = scanInt(" 출금할 금액");
-				if (addnum < 0) {
+				if (addnum <= 0) {
 					System.out.println("마이너스 금액은 출금할 수 없습니다.");
 					return;
+				}else if (addnum % 1000 != 0) {
+						System.out.println("1000원 단위로 출금하세요.");
+						return;
 				} else if (addnum > acc2.getBalance()) {
 					System.out.println("잔고가 부족합니다 전체잔고를 출력할까요?");
 					String addnym = scanValue("Y: 전체처리, N출금요청");
 					if ("Y".equalsIgnoreCase(addnym)) {
-						System.out.println("전체처리");
+						System.out.println("전체처리 완료");
 						isFind = true;
 					} else if ("N".equalsIgnoreCase(addnym)) {
 						System.out.println("출금요청 취소");
@@ -159,18 +162,18 @@ public class AccountManager2 {
 		} catch (EOFException e) {
 			System.out.println("파일불러오기 끝");
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			System.out.println("불러오기 실패");
 		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		} catch (IOException e) {
-			e.printStackTrace();
+			
 		}
 	}
-
+	//오토서버 객체를 받아서 사용한 메서드
 	public void AutoSaver(AutoSaver mgr) {
 
 		int choice = scanInt("1.자동저장On, 2.자동저장Off");
 		if (choice == 1) {
+			System.out.println("자동저장on");
 			if (mgr.isAlive()) {
 				System.out.println("이미 실행 중 입니다");
 			} else {
@@ -178,6 +181,7 @@ public class AccountManager2 {
 			}
 
 		} else if (choice == 2) {
+			System.out.println("자동저장 off");
 			mgr.interrupt();
 		}
 	}

@@ -2,9 +2,9 @@ package shopping;
 
 import java.sql.SQLException;
 
-public class SelectShop extends IConnectImpl {
+public class SelectAll extends IConnectImpl {
 
-	public SelectShop() {
+	public SelectAll() {
 		super("education", "1234");
 	}
 
@@ -12,11 +12,9 @@ public class SelectShop extends IConnectImpl {
 	public void execute() {
 		try {
 			stmt = con.createStatement();
-			String item = scanValue("상품명");
-			String query = "SELECT g_idx, goods_name, " + " to_char(goods_price, '999,999,999'), "
-					+ " to_char(regidate, 'yyyy-mm-dd hh:mi'), p_code " 
-					+ " FROM sh_goods WHERE goods_name "
-					+ " LIKE '%" + item + "%'";
+			String query = "SELECT g_idx, goods_name, " + " ltrim(to_char(goods_price, '999,999,999')), "
+					+ " ltrim(to_char(regidate, 'yyyy-mm-dd hh:mi')), p_code " 
+					+ " FROM sh_goods";
 
 			rs = stmt.executeQuery(query);
 
@@ -30,14 +28,14 @@ public class SelectShop extends IConnectImpl {
 				System.out.printf("%s %s %s %s %s\n", idx, name, price, date, code);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
 		} finally {
 			close();
 		}
 	}
 
 	public static void main(String[] args) {
-		SelectShop selctSQL = new SelectShop();
-		selctSQL.execute();
+		SelectAll selctall = new SelectAll();
+		selctall.execute();
 	}
-
 }
